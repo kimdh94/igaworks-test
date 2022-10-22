@@ -5,6 +5,7 @@ import pyarrow.parquet as pq
 import sys
 import json, io
 from s3_conn import s3_connection
+from datetime import datetime
 
 
 # S3 - csv 파일 parquet 변환
