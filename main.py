@@ -44,14 +44,14 @@ def main():
         if arg=='1':
             from attribution_data import schema
 
-            file_path = 'attribution_data.json'
+            file_path = 'json_file/attribution_data.json'
             parquet_schema = schema()
 
         # Event Data
         elif arg=='2':
             from event_data import schema
 
-            file_path = 'event_data.json'
+            file_path = 'json_file/event_data.json'
             parquet_schema = schema()
 
         else:

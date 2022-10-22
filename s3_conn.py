@@ -4,7 +4,7 @@ import json
 
 def s3_connection():
     try:
-        with open('aws_key.json', encoding='UTF-8') as json_file:
+        with open('json_file/aws_key.json', encoding='UTF-8') as json_file:
             data = json.load(json_file)
 
         accesskey = data["accesskey"]

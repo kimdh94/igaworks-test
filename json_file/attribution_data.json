@@ -1,6 +1,6 @@
 {
     "csv_file":"source/Attribution",
-    "parquet_file":"./Attribution_parquet",
+    "parquet_file":"dest/Attribution_parquet",
     "upload_file":"dest/Attribution_parquet",
     "header":["partner", "campaign", "server_datetime", "tracker_id", "log_id", "attribution_type", "identity_adid"],
     "dtype":{"partner":"str", "campaign":"str", "server_datetime":"str", "tracker_id":"str", "log_id":"str", "attribution_type":"int64", "identity_adid":"str"},
