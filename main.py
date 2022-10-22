@@ -16,7 +16,8 @@ def csv_to_parquet(csv_file, parquet_file, upload_file, chunksize, header, dtype
 
     # csv 파일 읽기
     # csv_stream = pd.read_csv(csv_file, chunksize=chunksize, low_memory=False, names=header, dtype=dtype, parse_dates=parse_dates)
-    csv_stream = pd.read_csv(io.BytesIO(obj["Body"].read()), chunksize=chunksize, low_memory=False, names=header, dtype=dtype, parse_dates=parse_dates)
+    dt_parser = lambda x: datetime.strptime(x, "%Y-%m-%d %H:%M:%S.%f")
+    csv_stream = pd.read_csv(io.BytesIO(obj["Body"].read()), chunksize=chunksize, low_memory=False, names=header, dtype=dtype, parse_dates=parse_dates, date_parser=dt_parser)
 
     # parquet 변환
     for i, chunk in enumerate(csv_stream):
