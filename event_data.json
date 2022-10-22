@@ -1,0 +1,9 @@
+{
+    "csv_file":"source/Event",
+    "parquet_file":"./Event_parquet",
+    "upload_file":"dest/Event_parquet",
+    "header":["identity_adid", "os", "model", "country", "event_name", "log_id", "server_datetime", "quantity", "price"],
+    "dtype":{"identity_adid":"str", "os":"str", "model":"str", "country":"str", "event_name":"str", "log_id":"str", "server_datetime":"str", "quantity":"Int64", "price":"float64"},
+    "parse_dates":["server_datetime"],
+    "chunksize":10000
+}

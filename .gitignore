@@ -1,0 +1,11 @@
+# venv
+venv
+
+# sample file
+sample*
+
+# aws key
+aws_key.json
+
+# test file
+test.py
