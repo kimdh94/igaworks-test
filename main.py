@@ -30,7 +30,7 @@ def csv_parsing(obj, file_name, src_path, chunksize, header, dtype):
         
         for dt in chunk_ymd_list:
             # 일자별 dataframe 추출 및 저장
-            tmp_df = sort_chunk.loc[dt]
+            tmp_df = sort_chunk.loc[[dt]]
             
             # csv 파일명
             tmp_file_name = file_name +'_' + dt
