@@ -10,5 +10,6 @@ aws_key.json
 # test file
 test.py
 
-# destination
-dest
+# destination, sorce
+dest/*
+src/*

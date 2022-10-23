@@ -1,7 +1,8 @@
 {
-    "csv_file":"source/Attribution",
-    "parquet_file":"dest/Attribution_parquet",
-    "upload_file":"dest/Attribution_parquet",
+    "file_name":"Attribution",
+    "csv_file_path": "source/",
+    "parquet_file_path":"dest/Attribution/",
+    "upload_file_path":"dest/Attribution/",
     "header":["partner", "campaign", "server_datetime", "tracker_id", "log_id", "attribution_type", "identity_adid"],
     "dtype":{"partner":"str", "campaign":"str", "server_datetime":"str", "tracker_id":"str", "log_id":"str", "attribution_type":"int64", "identity_adid":"str"},
     "parse_dates":["server_datetime"],
