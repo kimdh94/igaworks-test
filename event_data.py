@@ -10,7 +10,7 @@ def schema():
         ('log_id', pa.string()),
         ('server_datetime', pa.timestamp('ms', tz='Asia/Seoul')),
         ('quantity', pa.int64()),
-        ('price', pa.float64()),
+        ('price', pa.decimal128(10,1)),
     ])
 
     return parquet_schema

@@ -6,6 +6,7 @@ import sys
 import json, io, os
 from s3_conn import s3_connection
 from datetime import datetime
+import decimal
 
 
 # csv 파일 일자별 파싱하여 생성 후 일자별 리스트 반환
@@ -69,14 +70,18 @@ def csv_to_parquet(file_name, csv_file_path, src_path, parquet_file_path, upload
         # dest/(Attribution 또는 Event)/(Attribution 또는 Event)_yyyymmdd - 파싱된 csv 파일로 parquet 변환
         parquet_file = parquet_file_path+file_name+'_'+ymd
 
-        # dest/(Attribution 또는 Event)/yyyymmdd/(Attribution 또는 Event)_yyyymmdd - S3 업로드 path
-        upload_file = upload_file_path+ymd+'/'+file_name+'_'+ymd
+        # dest/(Attribution 또는 Event)/year=yyyy/month=mm/day=dd/(Attribution 또는 Event)_yyyymmdd - S3 업로드 path
+        dt=ymd.split('-')
+        upload_file = "{upload_file_path}year={year}/month={month}/day={day}/{file_name}_{ymd}".format(upload_file_path=upload_file_path, year=dt[0], month=dt[1], day=dt[2], file_name=file_name, ymd=ymd)
 
         csv_stream = pd.read_csv(src_file, chunksize=chunksize, low_memory=False, names=header, dtype=dtype, parse_dates=parse_dates, date_parser=dt_parser)
 
         # parquet 변환 작업
         for i, chunk in enumerate(csv_stream):
             print("Chunk", i)
+            if file_name == 'Event':
+                chunk['price'] = chunk['price'].astype('str').map(decimal.Decimal)
+    
             if i == 0:
                 parquet_writer = pq.ParquetWriter(parquet_file, parquet_schema, compression='snappy')
                 
@@ -89,9 +94,14 @@ def csv_to_parquet(file_name, csv_file_path, src_path, parquet_file_path, upload
         s3.upload_file(parquet_file, bucket_name, upload_file)
 
 
+# 디렉토리가 없을시 생성 / 있을시 파일 삭제
 def dir_make(path):
     if not os.path.exists(path):
         os.makedirs(path)
+    
+    else:
+        for file in os.scandir(path):
+            os.remove(file.path)
 
 
 def main():
