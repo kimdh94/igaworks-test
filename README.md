@@ -7,8 +7,11 @@ json파일을 참조하여 AWS S3 연결
 
 ## 실행 방법
 - Attribution 데이터 작업시
+
     python main() 1
 
+
 - Event 데이터 작업시
+
     python main() 2
 
