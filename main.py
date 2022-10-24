@@ -37,7 +37,7 @@ def csv_parsing(obj, file_name, src_path, chunksize, header, dtype):
             tmp_file_name = file_name +'_' + dt
 
             # 파일이 없을 경우 생성, 있을 경우 이어쓰기
-            if not os.path.exists(tmp_file_name):
+            if not os.path.exists(src_path+tmp_file_name):
                 tmp_df.to_csv(src_path+tmp_file_name, index=False, mode='w', header=False, quoting=1)
             else:
                 tmp_df.to_csv(src_path+tmp_file_name, index=False, mode='a', header=False, quoting=1)
