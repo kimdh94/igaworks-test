@@ -14,7 +14,7 @@ def csv_parsing(obj, file_name, src_path, chunksize, header, dtype):
     print("--- csv parsing start ---")
     ymd_list =[]
 
-    csv_df = pd.read_csv(io.BytesIO(obj["Body"].read()), chunksize=chunksize, low_memory=False, names=header, dtype=dtype)
+    csv_df = pd.read_csv(io.BytesIO(obj["Body"].read()), chunksize=chunksize, names=header, dtype=dtype)
 
     # 일자별로 파싱된 csv 파일 생성
     for i, chunk in enumerate(csv_df):
@@ -74,7 +74,7 @@ def csv_to_parquet(file_name, csv_file_path, src_path, parquet_file_path, upload
         dt=ymd.split('-')
         upload_file = "{upload_file_path}year={year}/month={month}/day={day}/{file_name}_{ymd}".format(upload_file_path=upload_file_path, year=dt[0], month=dt[1], day=dt[2], file_name=file_name, ymd=ymd)
 
-        csv_stream = pd.read_csv(src_file, chunksize=chunksize, low_memory=False, names=header, dtype=dtype, parse_dates=parse_dates, date_parser=dt_parser)
+        csv_stream = pd.read_csv(src_file, chunksize=chunksize, names=header, dtype=dtype, parse_dates=parse_dates, date_parser=dt_parser)
 
         # parquet 변환 작업
         for i, chunk in enumerate(csv_stream):
